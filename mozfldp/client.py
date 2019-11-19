@@ -79,7 +79,7 @@ class Client:
         payload = json.dumps(client_data)
 
         # send the post request
-        api_endpoint = "/api/v1/client_update/{}".format(self._id)
+        api_endpoint = "http://0.0.0.0:8000/api/v1/client_update/{}".format(self._id)
         r = requests.post(url=api_endpoint, data=payload)
 
     def update_and_submit_weights_dp(
