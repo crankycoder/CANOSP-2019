@@ -74,16 +74,16 @@ class Client:
 
         # load the client weight into json payload
         client_data = {
-            "coefs": coefs.tolist(),
-            "intercept": intercept.tolist(),
+            "coefs": coefs.tolist() if coefs else None,
+            "intercept": intercept.tolist() if intercept else None,
             "num_samples": self._n
         }
 
         payload = json.dumps(client_data)
 
         # send the post request to update the weights
-        api_endpoint = "http://0.0.0.0:8000/api/v1/client_update/{}".format(self._id)
-        requests.post(url=api_endpoint, data=payload)
+        api_endpoint = "http://0.0.0.0:8000/api/v1/ingest_client_data/{}".format(self._id)
+        requests.post(url=api_endpoint, json=payload)
 
     def update_and_submit_weights_dp(
         self, current_coef, current_intercept, num_epochs, batch_size
